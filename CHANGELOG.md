@@ -8,64 +8,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
-- SwiftData model generation
-- Macro-based code generation
+- visionOS navigation support
 
-## [1.2.0] - 2026-02-06
-
-### Added
-- **Mock Generation**
-  - Protocol mock generation
-  - Spy generation with call tracking
-  - Stub generation with default values
-  - Fake implementation generation
-
-- **Asset Generation**
-  - Type-safe asset catalogs
-  - Color palette generation
-  - Image asset enums
-  - Symbol names generation
-
-- **Localization**
-  - Localizable.strings parser
-  - Type-safe localization keys
-  - Pluralization support
-  - String interpolation handling
-
-- **Dependency Injection**
-  - Container generation
-  - Protocol witness generation
-  - Factory pattern templates
-  - Environment-based configuration
-
-- **Model Generation**
-  - Codable models from JSON
-  - CoreData model generation
-  - Realm model generation
-  - GraphQL type generation
-
-### Changed
-- Improved CLI performance
-- Better error messages with suggestions
-
-### Fixed
-- Nested type handling in mocks
-- Unicode support in localization
-
-## [1.1.0] - 2026-01-15
+## [1.0.0] - 2024-01-15
 
 ### Added
-- SwiftUI view scaffolding
-- Test file generation
-- MVVM template generation
+- Type-safe navigation with compile-time checks
+- SwiftUI NavigationStack integration
+- Deep linking support with URL parsing
+- Tab bar coordination
+- Modal presentation handling
+- Navigation state persistence
+- Route parameters with type safety
+- Navigation interceptors (guards)
+- Animated transitions
+- Back stack management
+- Child router support (coordinator pattern)
 
-## [1.0.0] - 2026-01-01
+### Features
+- Zero dependencies
+- Protocol-oriented design
+- Full async/await support
 
-### Added
-- Initial release with core generators
-- CLI tool with configuration support
-
-[Unreleased]: https://github.com/muhittincamdali/SwiftCodeGen/compare/v1.2.0...HEAD
-[1.2.0]: https://github.com/muhittincamdali/SwiftCodeGen/compare/v1.1.0...v1.2.0
-[1.1.0]: https://github.com/muhittincamdali/SwiftCodeGen/compare/v1.0.0...v1.1.0
-[1.0.0]: https://github.com/muhittincamdali/SwiftCodeGen/releases/tag/v1.0.0
+[Unreleased]: https://github.com/muhittincamdali/SwiftRouter/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/muhittincamdali/SwiftRouter/releases/tag/v1.0.0
