@@ -1,69 +1,80 @@
-# Contributing to SwiftCodeGen
+# Contributing to SwiftRouter
 
-Thank you for your interest in contributing! 🛠️
+First off, thank you for considering contributing to SwiftRouter! It's people like you that make SwiftRouter such a great tool.
 
-## Adding New Generators
+## Code of Conduct
 
-### 1. Create Generator Module
+This project and everyone participating in it is governed by our Code of Conduct. By participating, you are expected to uphold this code.
 
-```swift
-// Sources/SwiftCodeGen/Generators/MyGenerator.swift
+## How Can I Contribute?
 
-public struct MyGenerator: Generator {
-    public let name = "myfeature"
-    public let description = "Generates my feature code"
-    
-    public func generate(config: Config) throws -> [GeneratedFile] {
-        // Parse input
-        // Generate code
-        // Return files
-    }
-}
+### Reporting Bugs
+
+Before creating bug reports, please check the existing issues as you might find out that you don't need to create one. When you are creating a bug report, please include as many details as possible:
+
+- **Use a clear and descriptive title**
+- **Describe the exact steps which reproduce the problem**
+- **Provide specific examples to demonstrate the steps**
+- **Describe the behavior you observed after following the steps**
+- **Explain which behavior you expected to see instead and why**
+- **Include Swift version and OS version**
+
+### Suggesting Enhancements
+
+Enhancement suggestions are tracked as GitHub issues. When creating an enhancement suggestion, please include:
+
+- **Use a clear and descriptive title**
+- **Provide a step-by-step description of the suggested enhancement**
+- **Provide specific examples to demonstrate the steps**
+- **Describe the current behavior and explain which behavior you expected to see instead**
+- **Explain why this enhancement would be useful**
+
+### Pull Requests
+
+1. Fork the repo and create your branch from `main`
+2. If you've added code that should be tested, add tests
+3. If you've changed APIs, update the documentation
+4. Ensure the test suite passes
+5. Make sure your code follows the existing style (SwiftLint)
+6. Issue that pull request!
+
+## Development Setup
+
+```bash
+# Clone your fork
+git clone https://github.com/YOUR_USERNAME/SwiftRouter.git
+
+# Navigate to the project
+cd SwiftRouter
+
+# Open in Xcode
+open Package.swift
+
+# Run tests
+swift test
 ```
 
-### 2. Register Generator
+## Style Guide
 
-```swift
-// Sources/SwiftCodeGen/CLI/Commands.swift
-static let generators: [Generator] = [
-    MockGenerator(),
-    AssetGenerator(),
-    MyGenerator(), // Add here
-]
-```
+- Follow [Swift API Design Guidelines](https://swift.org/documentation/api-design-guidelines/)
+- Use SwiftLint for code style consistency
+- Write meaningful commit messages following [Conventional Commits](https://www.conventionalcommits.org/)
+- Document public APIs with DocC-compatible comments
 
-### 3. Add Tests
+## Commit Messages
 
-```swift
-final class MyGeneratorTests: XCTestCase {
-    func testBasicGeneration() throws {
-        let generator = MyGenerator()
-        let files = try generator.generate(config: .test)
-        
-        XCTAssertEqual(files.count, 1)
-        XCTAssertTrue(files[0].content.contains("expected"))
-    }
-}
-```
+We follow the [Conventional Commits](https://www.conventionalcommits.org/) specification:
 
-### 4. Document in README
+- `feat:` A new feature
+- `fix:` A bug fix
+- `docs:` Documentation only changes
+- `style:` Code style changes (formatting, semicolons, etc)
+- `refactor:` Code change that neither fixes a bug nor adds a feature
+- `test:` Adding missing tests
+- `chore:` Changes to the build process or auxiliary tools
 
-Add usage examples and configuration options.
+Example: `feat(deeplink): add universal link support`
 
-## Code Style
+## License
 
-Generated code should:
-- Follow Swift API Design Guidelines
-- Include proper documentation
-- Be formatted consistently
-- Handle edge cases gracefully
-
-## Pull Request Checklist
-
-- [ ] Generator works correctly
-- [ ] Unit tests pass
-- [ ] Documentation updated
-- [ ] CHANGELOG entry added
-- [ ] CLI help text updated
-
-Thank you for contributing! 🙏
+By contributing, you agree that your contributions will be licensed under the MIT License.
