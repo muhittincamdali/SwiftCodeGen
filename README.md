@@ -113,7 +113,10 @@ class MockUserRepository: UserRepository {
 ## Configuration
 
 ```yaml
-# swiftcodegen.yml
+# swiftcodegen
+
+## 🚀 Killer Feature: OpenAPI 3 to Swift 6 Generator
+Don't write boilerplate network code. Feed your `swagger.json` to the engine, and it will instantly generate a 100% Swift 6 compliant, Actor-isolated `SwiftNetwork` client..yml
 assets:
   input: Resources/Assets.xcassets
   output: Sources/Generated/Assets.swift
