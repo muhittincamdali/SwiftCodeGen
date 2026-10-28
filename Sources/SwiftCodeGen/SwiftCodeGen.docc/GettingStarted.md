@@ -107,5 +107,10 @@ safe:
 | A property wrapper                      | The wrapper's storage would not be guarded.                             |
 | `var a = 0, b = 1`, `var (a, b) = …`    | Declare each property on its own line.                                  |
 
+The attribute check recognizes a global actor by a name that ends in `Actor`, such as
+`@MainActor`. With any other global actor the class stops compiling at the generated
+`_requireNoGlobalActor()`, with "call to global actor '…'-isolated instance method 'withLock' in
+a synchronous nonisolated context"; remove the attribute there as well.
+
 To leave a property out on purpose, mark it `nonisolated(unsafe)`; the compiler then trusts you
 with it, as it would without the macro.

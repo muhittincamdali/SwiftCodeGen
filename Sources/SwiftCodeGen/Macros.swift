@@ -23,9 +23,11 @@
 /// can be `weak` or `unowned`. `let` constants, computed properties and `static` properties are
 /// left as they are.
 ///
-/// The class must be `final` and must not be isolated to a global actor such as `@MainActor`. In a
-/// module whose default actor isolation is `MainActor`, declare it `nonisolated final class`.
-@attached(member, names: named(_lock), named(withLock))
+/// The class must be `final` and must not be isolated to a global actor such as `@MainActor`. A
+/// global actor whose name does not end in `Actor` is caught by the compiler instead: the class
+/// then fails to compile at the generated `_requireNoGlobalActor()`. In a module whose default
+/// actor isolation is `MainActor`, declare it `nonisolated final class`.
+@attached(member, names: named(_lock), named(withLock), named(_requireNoGlobalActor))
 @attached(memberAttribute)
 @attached(extension, conformances: Sendable)
 public macro Synchronized() = #externalMacro(module: "SwiftCodeGenMacros", type: "SynchronizedMacro")

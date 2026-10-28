@@ -31,6 +31,8 @@ string, OpenAPI or mock generation, the README lists the tools to use.
 - Compiler errors, with fix-its where the fix is clear, for structs, enums, actors, non-final
   classes (add `final`), global-actor isolation (remove it), `lazy` (remove it), observers,
   overrides, property wrappers, several bindings, tuple patterns, and misuses of `@Streamed`.
+  A class isolated to a global actor whose name does not end in `Actor` fails to compile at a
+  generated nonisolated call to `withLock`.
 - A DocC catalog with the articles "Getting started", "Streaming changes" and "Choosing a
   tool", published to GitHub Pages.
 - The example app `SyncDemo` (iOS and macOS, MainActor default isolation) with a shared

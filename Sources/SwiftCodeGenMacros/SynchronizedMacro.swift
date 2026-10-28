@@ -81,6 +81,17 @@ extension SynchronizedMacro: MemberMacro {
                 try _lock.withLock(body)
             }
             """,
+            // The attribute check in validate(_:) only knows global actors by name. This call
+            // fails to compile when the class is isolated to any global actor, so one named
+            // without the "Actor" suffix is caught too.
+            """
+            /// Does not compile when the class is isolated to a global actor: `@Synchronized`
+            /// classes are used from any thread.
+            nonisolated private func _requireNoGlobalActor() {
+                withLock {
+                }
+            }
+            """,
         ]
     }
 }

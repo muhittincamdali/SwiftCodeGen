@@ -18,6 +18,13 @@ let lockMembers = """
         ) throws(Failure) -> Result {
             try _lock.withLock(body)
         }
+
+        /// Does not compile when the class is isolated to a global actor: `@Synchronized`
+        /// classes are used from any thread.
+        nonisolated private func _requireNoGlobalActor() {
+            withLock {
+            }
+        }
     """
 
 /// The locked accessors of a property whose storage is `storage`.
