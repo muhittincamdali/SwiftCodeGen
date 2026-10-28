@@ -51,12 +51,19 @@ extension SynchronizedPropertyMacro: AccessorMacro {
         ]
         // A weak or unowned reference cannot be yielded in place; get and set cover it.
         if property.ownership == nil {
+            // The send is in the defer, before the unlock: when the in-place mutation throws,
+            // the code after `yield` does not run, but the value may already have changed.
+            let release = property.isStreamed
+                ? "\(property.broadcastName.text).send(\(storage.text))\n        _lock.unlock()"
+                : "_lock.unlock()"
             accessors.append(
                 """
                 _modify {
                     _lock.lock()
-                    defer { _lock.unlock() }
-                    yield &\(storage)\(raw: notify)
+                    defer {
+                        \(raw: release)
+                    }
+                    yield &\(storage)
                 }
                 """
             )

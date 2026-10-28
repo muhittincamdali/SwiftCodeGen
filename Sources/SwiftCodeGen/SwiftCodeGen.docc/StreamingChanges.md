@@ -56,7 +56,9 @@ ProgressView(value: progress)
 - **The current value first.** Every read of `progressUpdates` returns a new stream whose first
   element is the value at that moment, so a view never starts empty.
 - **Every later change, in order.** The new value is sent while the lock is still held, so two
-  threads that change the property one after the other are seen in that order by everyone.
+  threads that change the property one after the other are seen in that order by everyone. An
+  in-place change (`+=`, `append`, a `mutating` method) is sent when it ends, also when it
+  throws after changing the value.
 - **Only real changes for `Equatable` types.** Assigning the value the property already has
   sends nothing. Types that are not `Equatable` send every assignment.
 - **Your own types need `nonisolated` in a MainActor app.** With MainActor as the default

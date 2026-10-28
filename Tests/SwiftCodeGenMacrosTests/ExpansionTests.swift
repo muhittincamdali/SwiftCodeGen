@@ -44,14 +44,16 @@ func lockedAccessors(_ storage: String, notify: String? = nil, modify: Bool = tr
             }
     """
     if modify {
+        // The send runs in the defer, so that a throwing in-place mutation still sends.
+        let release = notify.map { "\($0).send(\(storage))\n                " } ?? ""
         text += """
 
                 _modify {
                     _lock.lock()
                     defer {
-                        _lock.unlock()
+                        \(release)_lock.unlock()
                     }
-                    yield &\(storage)\(send)
+                    yield &\(storage)
                 }
         """
     }

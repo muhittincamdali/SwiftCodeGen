@@ -30,6 +30,20 @@ struct StreamedTests {
         #expect(await iterator.next() == ["start", "a", "b"])
     }
 
+    @Test("An in-place mutation that throws still sends the change it made")
+    func throwingInPlaceMutation() async {
+        var progress: Progress? = Progress()
+        var iterator = progress!.logUpdates.makeAsyncIterator()
+        #expect(await iterator.next() == [])
+        #expect(throws: LogRejected.self) {
+            try progress!.log.appendThenReject("partial")
+        }
+        #expect(progress!.log == ["partial"])
+        // The stream ends with the object; the change must already be buffered.
+        progress = nil
+        #expect(await iterator.next() == ["partial"])
+    }
+
     @Test("Every subscriber receives every change")
     func multipleSubscribers() async {
         let progress = Progress()
@@ -126,5 +140,15 @@ struct StreamedTests {
         #expect(await iterator.next() == 0)
         model.increment()
         #expect(await iterator.next() == 1)
+    }
+}
+
+struct LogRejected: Error {}
+
+extension [String] {
+    /// Changes the array, then throws: the shape of a mutation that fails halfway.
+    mutating func appendThenReject(_ entry: String) throws(LogRejected) {
+        append(entry)
+        throw LogRejected()
     }
 }
