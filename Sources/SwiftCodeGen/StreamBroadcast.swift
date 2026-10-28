@@ -3,7 +3,7 @@ import Foundation
 /// Sends each new value to any number of `AsyncStream` subscribers.
 ///
 /// An `AsyncStream` has one consumer. `StreamBroadcast` hands out a new stream to every caller of
-/// ``subscribe(current:)`` and delivers each value passed to ``send(_:)`` to all of them. A
+/// ``subscribe(current:)`` and delivers each value passed to `send(_:)` to all of them. A
 /// ``Streamed()`` property uses one to implement its `…Updates` stream, and you can use it on its
 /// own.
 ///
@@ -44,10 +44,10 @@ public final class StreamBroadcast<Value: Sendable>: Sendable {
     }
 
     /// Returns a new stream that starts with `current` and then delivers every value passed to
-    /// ``send(_:)``.
+    /// `send(_:)`.
     ///
     /// - Parameter current: The first value of the stream, normally the value the sender holds
-    ///   right now. Call this method and ``send(_:)`` under the same lock as the change of that
+    ///   right now. Call this method and `send(_:)` under the same lock as the change of that
     ///   value, so that no change falls between the first value and the next one.
     public func subscribe(current: Value) -> AsyncStream<Value> {
         let (stream, continuation) = AsyncStream<Value>.makeStream(
