@@ -37,7 +37,6 @@ enum PropertyAnalysis {
     private static let ownAttributes: Set<String> = ["Streamed", "_SynchronizedProperty"]
     private static let allowedAttributes: Set<String> = ["available", "objc", "nonobjc", "inlinable", "usableFromInline"]
 
-    // swiftlint:disable:next cyclomatic_complexity function_body_length
     init(_ variable: VariableDeclSyntax) {
         let modifiers = variable.modifiers
         if variable.bindingSpecifier.tokenKind == .keyword(.let) {
