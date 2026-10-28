@@ -5,6 +5,22 @@ struct SyncDemoApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView(initialDemo: Demo.fromLaunchArguments())
+                .preferredColorScheme(Self.colorSchemeFromLaunchArguments())
+        }
+        #if os(macOS)
+        .defaultSize(width: 480, height: 640)
+        #endif
+    }
+
+    /// `-appearance light` or `-appearance dark` fixes the appearance; the screenshot script uses it.
+    static func colorSchemeFromLaunchArguments(
+        _ arguments: [String] = ProcessInfo.processInfo.arguments
+    ) -> ColorScheme? {
+        guard let index = arguments.firstIndex(of: "-appearance"), index + 1 < arguments.count else { return nil }
+        switch arguments[index + 1] {
+        case "light": return .light
+        case "dark": return .dark
+        default: return nil
         }
     }
 }
