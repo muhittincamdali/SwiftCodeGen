@@ -1,0 +1,13 @@
+version: 1
+builder:
+  configs:
+    - platform: ios
+      scheme: SwiftCodeGen
+      documentation_targets: [SwiftCodeGen]
+    - platform: macos-spm
+    - platform: tvos
+      scheme: SwiftCodeGen
+    - platform: watchos
+      scheme: SwiftCodeGen
+    - platform: visionos
+      scheme: SwiftCodeGen
