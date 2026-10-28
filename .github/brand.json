@@ -1,0 +1,43 @@
+{
+  "name": "SwiftCodeGen",
+  "repository": "muhittincamdali/SwiftCodeGen",
+  "tagline": {
+    "en": "Swift macros that make a class Sendable without @unchecked and stream its changes."
+  },
+  "tags": {
+    "en": [
+      "Swift 6",
+      "Macros",
+      "iOS · macOS",
+      "AsyncStream"
+    ]
+  },
+  "motif": "code",
+  "buttons": [
+    "start",
+    "docs",
+    "examples"
+  ],
+  "links": {
+    "docs": "https://muhittincamdali.github.io/SwiftCodeGen/documentation/swiftcodegen/",
+    "examples": "Examples/"
+  },
+  "languages": [
+    "en",
+    "tr",
+    "zh-CN",
+    "ja",
+    "ko",
+    "es",
+    "de",
+    "fr",
+    "pt-BR",
+    "ru"
+  ],
+  "docc": {
+    "targets": [
+      "SwiftCodeGen"
+    ]
+  },
+  "socialTheme": "dark"
+}

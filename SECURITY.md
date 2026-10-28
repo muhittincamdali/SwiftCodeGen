@@ -1,53 +1,34 @@
-# Security Policy
+# Security policy
 
-## Supported Versions
+## Supported versions
 
-| Version | Supported          |
-| ------- | ------------------ |
-| 1.x.x   | :white_check_mark: |
-| < 1.0   | :x:                |
+Security fixes go into the latest release and the `main` branch.
 
-## Reporting a Vulnerability
+## Reporting a vulnerability
 
-We take the security of SwiftRouter seriously. If you have discovered a security vulnerability, we appreciate your help in disclosing it to us in a responsible manner.
+Report it privately, not in a public issue: open the repository's
+[Security tab](https://github.com/muhittincamdali/SwiftCodeGen/security) and choose **Report a
+vulnerability**, or follow the other channels in the
+[security policy of the muhittincamdali repositories](https://github.com/muhittincamdali/.github/blob/main/SECURITY.md).
+Include the class that shows the problem, the expansion Xcode shows for it (**Editor › Expand
+Macro**) and the Swift and OS versions you used.
 
-### How to Report
+## What SwiftCodeGen promises
 
-**Please do not report security vulnerabilities through public GitHub issues.**
+The macros run inside the compiler and read only the declaration they are attached to; the
+code they write runs inside your app. These are the properties a report can hold it to:
 
-Instead, please report them via email to the repository owner. You can find contact information on the GitHub profile.
+- It does not log, print, store or send anything. The macros access no files or network, and
+  the generated code touches only the properties of the class it is attached to.
+- Every read, write and in-place change of a guarded property happens while the object's lock
+  is held, and the class's `Sendable` conformance is checked by the compiler. A declaration the
+  macro cannot make safe is a compile error, not silently left unguarded; the only unguarded
+  stored state is what you mark `nonisolated(unsafe)` yourself.
+- Memory stays bounded: each stream subscriber buffers at most one value, and subscribers whose
+  stream ended, was cancelled or was dropped are removed. A stream does not keep its object
+  alive, and all streams end when the object is released.
 
-Please include the following information:
-
-- Type of issue (e.g., deep link injection, state manipulation, etc.)
-- Full paths of source file(s) related to the manifestation of the issue
-- The location of the affected source code (tag/branch/commit or direct URL)
-- Any special configuration required to reproduce the issue
-- Step-by-step instructions to reproduce the issue
-- Proof-of-concept or exploit code (if possible)
-- Impact of the issue, including how an attacker might exploit it
-
-### What to Expect
-
-- A confirmation of receipt within 48 hours
-- An assessment of the vulnerability within 7 days
-- Regular updates on our progress
-- Credit for responsible disclosure (if desired)
-
-## Security Best Practices
-
-When using SwiftRouter in your projects:
-
-1. **Validate Deep Links** - Always validate URL parameters before navigation
-2. **Use Route Guards** - Implement authentication guards for protected routes
-3. **Sanitize Parameters** - Never trust user input from URL parameters
-4. **Audit Navigation Paths** - Review which screens are accessible via deep links
-
-## Security Features
-
-SwiftRouter includes several security considerations:
-
-- **Type-Safe Parameters** - Reduces injection risks
-- **Route Guards** - Authentication/authorization interceptors
-- **URL Validation** - Built-in URL parsing with validation
-- **No External Dependencies** - Minimal attack surface
+What it does not promise: freedom from deadlocks between two objects whose locks two threads
+take in opposite orders, or from a crash when code running inside an in-place change of a
+property accesses the same property again (Swift's exclusivity check stops that, as it would
+without the macro).
