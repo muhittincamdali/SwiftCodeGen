@@ -7,12 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [2.0.0] - 2026-10-28
-
-SwiftCodeGen 2 is a new package under the old name. The 1.x code generators were removed in
-June 2026 and what remained did not build; 2.0 replaces them with two Swift macros for Swift 6
-strict concurrency, each tested and documented. Nothing from the 1.x API is kept: for asset,
-string, OpenAPI or mock generation, the README lists the tools to use.
+These changes are planned as 2.0.0. SwiftCodeGen 2 is a new package under the old name. The
+1.x code generators were removed in June 2026 and what remained did not build; 2.0 replaces
+them with two Swift macros for Swift 6 strict concurrency, each tested and documented. Nothing
+from the 1.x API is kept: for asset, string, OpenAPI or mock generation, the README lists the
+tools to use.
 
 ### Added
 
@@ -50,6 +49,5 @@ string, OpenAPI or mock generation, the README lists the tools to use.
 First release, with code generators for assets, strings, models, mocks and dependency
 injection.
 
-[Unreleased]: https://github.com/muhittincamdali/SwiftCodeGen/compare/v2.0.0...HEAD
-[2.0.0]: https://github.com/muhittincamdali/SwiftCodeGen/compare/v1.0.0...v2.0.0
+[Unreleased]: https://github.com/muhittincamdali/SwiftCodeGen/compare/v1.0.0...HEAD
 [1.0.0]: https://github.com/muhittincamdali/SwiftCodeGen/releases/tag/v1.0.0
