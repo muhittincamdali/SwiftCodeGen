@@ -87,6 +87,10 @@ class stays usable from background tasks there: its `Sendable` conformance keeps
 main actor (verified with Swift 6.4). If you prefer to state it in the declaration, write
 `nonisolated final class`; the example app in the repository builds with these settings.
 
+Value types that a `@Synchronized` class stores or streams are main-actor types too in such a
+target. Declare the ones you compare or stream from other threads `nonisolated`, for example
+`nonisolated enum UploadStatus: Sendable, Equatable`; see <doc:StreamingChanges>.
+
 ### What the macro rejects
 
 The macro reports an error, with a fix where one is clear, instead of producing code that is not

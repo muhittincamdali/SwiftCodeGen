@@ -36,9 +36,11 @@ code from that file, and the package's test target compiles and runs the same fi
 symlink `Tests/SwiftCodeGenTests/ReadmeSamples.swift`.
 
 The screenshots in the README come from this app:
-[`scripts/capture-example-screens.sh`](../scripts/capture-example-screens.sh) opens each screen
-with `-demo counter` or `-demo upload`, lets it play its scenario and takes a simulator
-screenshot in light and dark appearance.
+[`scripts/capture-mac-screens.sh`](../scripts/capture-mac-screens.sh) opens each screen of the
+Mac build with `-demo counter` or `-demo upload` and `-appearance light` or `-appearance dark`,
+lets it play its scenario and captures the window.
+[`scripts/capture-example-screens.sh`](../scripts/capture-example-screens.sh) does the same on an
+iPhone simulator.
 
 The project file is made with [XcodeGen](https://github.com/yonaskolb/XcodeGen) from
 [`project.yml`](SyncDemo/project.yml) and committed, so you only need XcodeGen after editing

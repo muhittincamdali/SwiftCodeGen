@@ -59,6 +59,10 @@ ProgressView(value: progress)
   threads that change the property one after the other are seen in that order by everyone.
 - **Only real changes for `Equatable` types.** Assigning the value the property already has
   sends nothing. Types that are not `Equatable` send every assignment.
+- **Your own types need `nonisolated` in a MainActor app.** With MainActor as the default
+  isolation, an `enum Status: Equatable` and its `Equatable` conformance belong to the main
+  actor, so the stream, which compares values on the writer's thread, cannot use it and sends
+  every assignment. Declare such types `nonisolated enum Status: Sendable, Equatable`.
 - **The newest value when behind.** Each stream keeps one undelivered value. A subscriber that
   is slower than the writer skips to the latest value instead of building a queue; ten thousand
   changes while it is busy cost one buffered value.
