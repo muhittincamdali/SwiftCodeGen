@@ -36,6 +36,12 @@ let package = Package(
             name: "SwiftCodeGenTests",
             dependencies: ["SwiftCodeGen"]
         ),
+        // Compiled like a new Xcode 26+ app target: MainActor is the default isolation.
+        .testTarget(
+            name: "SwiftCodeGenMainActorTests",
+            dependencies: ["SwiftCodeGen"],
+            swiftSettings: [.defaultIsolation(MainActor.self)]
+        ),
         .testTarget(
             name: "SwiftCodeGenMacrosTests",
             dependencies: [

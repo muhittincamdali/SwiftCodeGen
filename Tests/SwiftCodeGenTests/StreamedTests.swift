@@ -44,14 +44,16 @@ struct StreamedTests {
 
     @Test("Assigning an Equatable property its current value sends nothing")
     func equatableDeduplication() async {
-        let progress = Progress()
-        var iterator = progress.titleUpdates.makeAsyncIterator()
+        var progress: Progress? = Progress()
+        var iterator = progress!.titleUpdates.makeAsyncIterator()
         #expect(await iterator.next() == .some(nil))
-        progress.title = nil
-        progress.title = "Copying"
-        progress.title = "Copying"
-        progress.title = "Done"
-        #expect(await iterator.next() == "Done")
+        progress!.title = nil
+        progress!.title = "Copying"
+        #expect(await iterator.next() == "Copying")
+        progress!.title = "Copying"
+        // The stream ends with the object; a repeated "Copying" would still be buffered.
+        progress = nil
+        #expect(await iterator.next() == nil)
     }
 
     @Test("A type that is not Equatable sends every assignment")
